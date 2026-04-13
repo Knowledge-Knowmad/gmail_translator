@@ -962,19 +962,33 @@ footer a:hover { text-decoration: underline; }
     </div>
     <div class="changelog-timeline">
 
-      <!-- v1.2.0 -->
+      <!-- v1.4.0 -->
       <div class="cl-entry">
         <div class="cl-dot"></div>
         <div class="cl-version">
-          <h3>v1.2.0</h3>
+          <h3>v1.4.0</h3>
           <span class="cl-date">2026-04-13</span>
         </div>
         <span class="cl-tag latest">Latest</span>
         <ul class="cl-list">
+          <li class="fix">修正含大量 Emoji 的電子報（如 Visual Capitalist）翻譯失敗的問題</li>
+          <li class="improve">大幅縮小批次分段大小（800/600 字元），避免 URL 編碼後超長</li>
+          <li class="feat">翻譯 API 加入 GET/POST 自動 fallback 機制</li>
+          <li class="improve">處理超長單行文字自動截斷，避免單次請求爆量</li>
+        </ul>
+      </div>
+
+      <!-- v1.3.0 -->
+      <div class="cl-entry">
+        <div class="cl-dot"></div>
+        <div class="cl-version">
+          <h3>v1.3.0</h3>
+          <span class="cl-date">2026-04-13</span>
+        </div>
+        <ul class="cl-list">
           <li class="fix">修正 Gmail Service Worker 攔截翻譯請求導致 HTTP 400 的問題</li>
-          <li class="improve">翻譯改由 Content Script 直接用 XHR 呼叫 API，繞過 Gmail SW</li>
-          <li class="improve">縮小批次分段大小至 1,600 字元，提升翻譯穩定性</li>
-          <li class="feat">偵測擴充功能失效時顯示「請重新整理頁面」提示</li>
+          <li class="improve">翻譯請求改回由 Background Service Worker 處理，確保跨域權限正確</li>
+          <li class="feat">偵測擴充功能失效時顯示「請重新整理頁面 (F5)」提示</li>
         </ul>
       </div>
 
