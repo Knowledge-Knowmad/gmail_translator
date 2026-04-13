@@ -123,7 +123,7 @@
   // === 批次翻譯 ===
   async function batchTranslate(texts) {
     const SEP = '\n§§§\n';
-    const MAX = 4200;
+    const MAX = 1600;
     const batches = [];
     let cur = [], len = 0;
     for (const t of texts) {

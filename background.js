@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 async function translateText(text) {
-  const MAX = 4500;
+  const MAX = 1800;
   if (text.length <= MAX) return await doTranslate(text);
 
   const parts = [];
@@ -35,21 +35,14 @@ async function translateText(text) {
   const results = [];
   for (const p of parts) {
     results.push(await doTranslate(p));
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 400));
   }
   return results.join('\n');
 }
 
 async function doTranslate(text) {
-  const url = 'https://translate.googleapis.com/translate_a/single';
-  const params = new URLSearchParams({
-    client: 'gtx', sl: 'en', tl: 'zh-TW', dt: 't', q: text
-  });
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString()
-  });
+  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q=' + encodeURIComponent(text);
+  const res = await fetch(url);
   if (!res.ok) throw new Error('Google Translate HTTP ' + res.status);
   const data = await res.json();
   return data[0].map(c => c[0]).join('');
