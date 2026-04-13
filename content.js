@@ -136,6 +136,9 @@
 
     const all = [];
     for (const batch of batches) {
+      if (!chrome.runtime?.id) {
+        throw new Error('擴充功能已更新，請重新整理此頁面 (F5)');
+      }
       const res = await chrome.runtime.sendMessage({ action: 'translate', text: batch.join(SEP) });
       if (!res || !res.ok) throw new Error(res?.error || '翻譯失敗');
       const parts = res.text.split(/§§§/);
