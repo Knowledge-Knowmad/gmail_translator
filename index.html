@@ -396,6 +396,80 @@ h1 .gradient {
   color: #e2e8f0;
 }
 
+/* === Install Guide === */
+.install-section { padding: 80px 0 100px; }
+.install-steps {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex; flex-direction: column; gap: 24px;
+}
+.install-step {
+  display: flex; gap: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.3s;
+}
+.install-step:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+}
+.install-step-num {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: 800;
+}
+.install-step-body h3 {
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 6px;
+}
+.install-step-body p {
+  font-size: 13px; color: #94a3b8;
+  line-height: 1.8;
+}
+.install-step-body code {
+  display: inline-block;
+  background: rgba(37,99,235,0.1);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: #60a5fa;
+  padding: 1px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.install-step-body .path-box {
+  display: block;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  color: #60a5fa;
+  word-break: break-all;
+}
+.install-note {
+  max-width: 700px;
+  margin: 28px auto 0;
+  display: flex; gap: 10px;
+  padding: 16px 20px;
+  background: rgba(251,191,36,0.06);
+  border: 1px solid rgba(251,191,36,0.15);
+  border-radius: 12px;
+  font-size: 13px; color: #94a3b8;
+  line-height: 1.7;
+}
+.install-note .note-icon { flex-shrink: 0; font-size: 18px; }
+.install-download-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
 /* === Changelog === */
 .changelog { padding: 80px 0 100px; }
 .changelog-timeline {
@@ -536,6 +610,7 @@ footer a:hover { text-decoration: underline; }
       <a href="#demo">Demo</a>
       <a href="#features">Features</a>
       <a href="#howto">How it works</a>
+      <a href="#install">Install</a>
       <a href="#changelog">Changelog</a>
       <a href="https://github.com/Knowledge-Knowmad/gmail_translator" target="_blank">GitHub</a>
     </div>
@@ -558,11 +633,11 @@ footer a:hover { text-decoration: underline; }
       不跳轉、不複製，翻譯直接顯示在信件中。
     </p>
     <div class="hero-actions">
-      <a class="btn-primary" href="https://github.com/Knowledge-Knowmad/gmail_translator" target="_blank">
-        <span>&#11015;</span> 下載安裝
+      <a class="btn-primary" href="gmail-translator-v1.1.0.zip" download>
+        <span>&#11015;</span> 下載 v1.1.0 (.zip)
       </a>
-      <a class="btn-secondary" href="#demo">
-        <span>&#9654;</span> 查看 Demo
+      <a class="btn-secondary" href="#install">
+        <span>&#9654;</span> 安裝教學
       </a>
     </div>
   </div>
@@ -661,7 +736,7 @@ footer a:hover { text-decoration: underline; }
   </div>
 </section>
 
-<!-- How it works -->
+<!-- How it works (quick overview) -->
 <section class="how-section" id="howto">
   <div class="container">
     <div class="section-label">How it works</div>
@@ -669,8 +744,8 @@ footer a:hover { text-decoration: underline; }
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h3>安裝擴充功能</h3>
-        <p>從 GitHub 下載原始碼，在 Chrome 以開發者模式載入。</p>
+        <h3>下載並安裝</h3>
+        <p>下載 .zip 壓縮檔，解壓縮後載入 Chrome 擴充功能。</p>
         <span class="step-arrow">&rarr;</span>
       </div>
       <div class="step">
@@ -684,6 +759,91 @@ footer a:hover { text-decoration: underline; }
         <h3>點擊翻譯</h3>
         <p>點一下「翻譯成中文」，翻譯結果立即顯示在信件中。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Install Guide -->
+<section class="install-section" id="install">
+  <div class="container">
+    <div class="section-label">Installation Guide</div>
+    <h2 class="section-title">安裝方法指引</h2>
+    <div class="install-steps">
+
+      <div class="install-step">
+        <div class="install-step-num">1</div>
+        <div class="install-step-body">
+          <h3>下載擴充功能</h3>
+          <p>點擊下方按鈕下載 <code>gmail-translator-v1.1.0.zip</code> 壓縮檔，或從 GitHub 取得最新版本。</p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn-primary" href="gmail-translator-v1.1.0.zip" download style="font-size:13px; padding:10px 20px; border-radius:10px;">
+              &#11015; 下載 .zip
+            </a>
+            <a class="btn-secondary" href="https://github.com/Knowledge-Knowmad/gmail_translator" target="_blank" style="font-size:13px; padding:10px 20px; border-radius:10px;">
+              GitHub Repo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="install-step">
+        <div class="install-step-num">2</div>
+        <div class="install-step-body">
+          <h3>解壓縮檔案</h3>
+          <p>將下載的 <code>.zip</code> 檔案解壓縮到任意資料夾。解壓縮後應包含以下檔案：</p>
+          <div class="path-box">
+            gmail-translator-v1.1.0/<br>
+            &nbsp;&nbsp;manifest.json<br>
+            &nbsp;&nbsp;background.js<br>
+            &nbsp;&nbsp;content.js<br>
+            &nbsp;&nbsp;popup.html<br>
+            &nbsp;&nbsp;style.css<br>
+            &nbsp;&nbsp;icon48.png / icon128.png
+          </div>
+        </div>
+      </div>
+
+      <div class="install-step">
+        <div class="install-step-num">3</div>
+        <div class="install-step-body">
+          <h3>開啟 Chrome 擴充功能頁面</h3>
+          <p>在 Chrome 瀏覽器網址列輸入以下網址，進入擴充功能管理頁面：</p>
+          <div class="path-box">chrome://extensions</div>
+          <p style="margin-top:10px;">開啟右上角的 <code>開發人員模式</code> (Developer mode) 開關。</p>
+        </div>
+      </div>
+
+      <div class="install-step">
+        <div class="install-step-num">4</div>
+        <div class="install-step-body">
+          <h3>載入擴充功能</h3>
+          <p>點擊左上角 <code>載入未封裝項目</code> (Load unpacked) 按鈕，選擇剛才解壓縮的資料夾。</p>
+          <p style="margin-top:6px;">載入成功後，擴充功能列表中會出現「<strong style="color:#60a5fa;">Gmail 一鍵翻譯 — 台灣慣用語中文</strong>」。</p>
+        </div>
+      </div>
+
+      <div class="install-step">
+        <div class="install-step-num">5</div>
+        <div class="install-step-body">
+          <h3>開始使用</h3>
+          <p>前往 <a href="https://mail.google.com" target="_blank" style="color:#60a5fa; text-decoration:underline;">Gmail</a> 打開任何一封英文信件。如果偵測到英文內容，右上角會自動浮現藍色的 <code>🌐 翻譯成中文</code> 按鈕，點擊即可翻譯。</p>
+          <p style="margin-top:6px;">翻譯完成後可點擊 <code>🔄 顯示原文</code> 切回英文。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="install-note">
+      <span class="note-icon">&#9888;&#65039;</span>
+      <div>
+        <strong style="color:#fbbf24;">注意：</strong>此擴充功能使用 Chrome Manifest V3 架構，僅支援 <strong>Google Chrome</strong> 及基於 Chromium 的瀏覽器（Edge、Brave、Arc 等）。每次 Chrome 更新後，開發者模式載入的擴充功能可能需要重新啟用。
+      </div>
+    </div>
+
+    <div class="install-download-cta">
+      <a class="btn-primary" href="gmail-translator-v1.1.0.zip" download>
+        <span>&#11015;</span> 下載 gmail-translator-v1.1.0.zip
+      </a>
     </div>
   </div>
 </section>
@@ -794,7 +954,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.feature-card, .step, .tech-tag, .cl-entry').forEach(el => {
+document.querySelectorAll('.feature-card, .step, .tech-tag, .install-step, .cl-entry').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
