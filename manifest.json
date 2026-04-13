@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gmail 一鍵翻譯 — 台灣慣用語中文",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "在 Gmail 中一鍵將英文信件翻譯為台灣繁體中文",
   "permissions": ["activeTab"],
   "host_permissions": [
