@@ -112,10 +112,24 @@ h1 {
   letter-spacing: -0.5px;
 }
 h1 .gradient {
-  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6, #60a5fa);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+h1 .hero-globe {
+  display: inline-block;
+  animation: gentle-bounce 3s ease-in-out infinite;
+}
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 .hero-desc {
   font-size: 17px;
@@ -634,10 +648,16 @@ h1 .gradient {
 /* === Footer === */
 footer {
   border-top: 1px solid rgba(255,255,255,0.06);
-  padding: 40px 0;
+  padding: 48px 0;
   text-align: center;
 }
-footer p {
+footer .author {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+footer .author-sub {
   font-size: 12px;
   color: #475569;
 }
@@ -665,11 +685,10 @@ footer a:hover { text-decoration: underline; }
     </div>
     <div class="nav-links">
       <a href="#demo">Demo</a>
-      <a href="#features">Features</a>
-      <a href="#howto">How it works</a>
-      <a href="#install">Install</a>
-      <a href="#changelog">Changelog</a>
-      <a href="https://github.com/Knowledge-Knowmad/gmail_translator" target="_blank">GitHub</a>
+      <a href="#features">功能特色</a>
+      <a href="#howto">使用方式</a>
+      <a href="#install">安裝教學</a>
+      <a href="#changelog">改版紀錄</a>
     </div>
   </div>
 </nav>
@@ -682,7 +701,7 @@ footer a:hover { text-decoration: underline; }
       Chrome Extension v1.3
     </div>
     <h1>
-      Gmail 英文信件<br>
+      <span class="hero-globe">🌐</span> Gmail 英文信件<br>
       <span class="gradient">一鍵翻譯成中文</span>
     </h1>
     <p class="hero-desc">
@@ -999,9 +1018,9 @@ footer a:hover { text-decoration: underline; }
 <!-- Footer -->
 <footer>
   <div class="container">
-    <p>
-      Gmail 一鍵翻譯 &mdash; Open Source on
-      <a href="https://github.com/Knowledge-Knowmad/gmail_translator" target="_blank">GitHub</a>
+    <p class="author">知識遊牧 &mdash; 彭其捷</p>
+    <p class="author-sub">
+      <a href="mailto:foxfirejack@gmail.com">foxfirejack@gmail.com</a>
     </p>
   </div>
 </footer>
