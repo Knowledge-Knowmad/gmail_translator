@@ -1,0 +1,127 @@
+/* ===== 浮動按鈕（可拖拉）===== */
+#tw-translate-fab {
+  position: fixed;
+  top: 78px;
+  right: 28px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#tw-translate-fab.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#tw-translate-fab.dragging {
+  transition: none !important;
+  opacity: 0.85;
+}
+
+/* 拖拉把手 */
+#tw-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 36px;
+  border-radius: 8px 0 0 8px;
+  background: rgba(30, 64, 175, 0.15);
+  color: #6b7280;
+  font-size: 14px;
+  cursor: grab;
+  user-select: none;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: -1px;
+}
+#tw-drag-handle:hover {
+  background: rgba(30, 64, 175, 0.3);
+  color: #1e40af;
+}
+#tw-translate-fab.dragging #tw-drag-handle {
+  cursor: grabbing;
+  background: rgba(30, 64, 175, 0.4);
+  color: #fff;
+}
+
+/* 按鈕共用 */
+#tw-translate-btn,
+#tw-restore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 0 24px 24px 0;
+  color: #fff;
+  font-size: 13.5px;
+  font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.3px;
+}
+#tw-translate-btn {
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  box-shadow: 0 4px 14px rgba(37,99,235,0.35), 0 1px 3px rgba(0,0,0,0.1);
+}
+#tw-translate-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #0284c7);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.5);
+}
+#tw-translate-btn.loading { opacity: 0.75; cursor: wait; }
+#tw-translate-btn.loading .btn-text::after {
+  content: '';
+  display: inline-block;
+  width: 12px; height: 12px;
+  margin-left: 6px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: tw-spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+#tw-restore-btn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+}
+#tw-restore-btn:hover {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.5);
+}
+.btn-icon { font-size: 15px; }
+@keyframes tw-spin { to { transform: rotate(360deg); } }
+
+/* ===== 翻譯提示標頭 ===== */
+.tw-result-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+  border: 1px solid #c7d2fe;
+  font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  animation: tw-fadeIn 0.4s ease;
+}
+.tw-flag { font-size: 18px; }
+.tw-title {
+  font-size: 13px; font-weight: 700;
+  color: #1e40af; letter-spacing: 0.5px;
+}
+.tw-badge {
+  margin-left: auto;
+  font-size: 10px; padding: 3px 8px;
+  border-radius: 10px;
+  background: rgba(37,99,235,0.1);
+  color: #3b82f6; font-weight: 600;
+}
+@keyframes tw-fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
