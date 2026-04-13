@@ -120,6 +120,24 @@
     return segments;
   }
 
+  // === 單段翻譯（用 XHR 繞過 Gmail Service Worker）===
+  function doTranslate(text) {
+    return new Promise((resolve, reject) => {
+      const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q=' + encodeURIComponent(text);
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = () => {
+        if (xhr.status !== 200) return reject(new Error('Google Translate HTTP ' + xhr.status));
+        try {
+          const data = JSON.parse(xhr.responseText);
+          resolve(data[0].map(c => c[0]).join(''));
+        } catch (e) { reject(new Error('翻譯回應解析失敗')); }
+      };
+      xhr.onerror = () => reject(new Error('翻譯請求失敗，請檢查網路連線'));
+      xhr.send();
+    });
+  }
+
   // === 批次翻譯 ===
   async function batchTranslate(texts) {
     const SEP = '\n§§§\n';
@@ -136,14 +154,11 @@
 
     const all = [];
     for (const batch of batches) {
-      if (!chrome.runtime?.id) {
-        throw new Error('擴充功能已更新，請重新整理此頁面 (F5)');
-      }
-      const res = await chrome.runtime.sendMessage({ action: 'translate', text: batch.join(SEP) });
-      if (!res || !res.ok) throw new Error(res?.error || '翻譯失敗');
-      const parts = res.text.split(/§§§/);
+      const combined = batch.join(SEP);
+      const result = await doTranslate(combined);
+      const parts = result.split(/§§§/);
       for (let i = 0; i < batch.length; i++) all.push(parts[i] ? parts[i].trim() : batch[i]);
-      if (batches.length > 1) await new Promise(r => setTimeout(r, 300));
+      if (batches.length > 1) await new Promise(r => setTimeout(r, 400));
     }
     return all;
   }
