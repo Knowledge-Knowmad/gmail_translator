@@ -465,6 +465,63 @@ h1 .gradient {
   line-height: 1.7;
 }
 .install-note .note-icon { flex-shrink: 0; font-size: 18px; }
+.install-tip {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(37,99,235,0.06);
+  border: 1px solid rgba(37,99,235,0.15);
+  border-radius: 8px;
+  font-size: 13px; color: #60a5fa;
+  line-height: 1.6;
+}
+.install-tip-icon { font-size: 16px; flex-shrink: 0; }
+.path-box-row {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+}
+.path-box-row span { flex: 1; }
+.copy-btn, .goto-btn {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  text-decoration: none;
+}
+.copy-btn {
+  background: rgba(37,99,235,0.15);
+  border: 1px solid rgba(37,99,235,0.3);
+  color: #60a5fa;
+}
+.copy-btn:hover {
+  background: rgba(37,99,235,0.25);
+}
+.copy-btn.copied {
+  background: rgba(74,222,128,0.15);
+  border-color: rgba(74,222,128,0.3);
+  color: #4ade80;
+}
+.goto-btn {
+  background: rgba(139,92,246,0.15);
+  border: 1px solid rgba(139,92,246,0.3);
+  color: #a78bfa;
+}
+.goto-btn:hover {
+  background: rgba(139,92,246,0.25);
+}
+.install-screenshot {
+  display: block;
+  margin-top: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-width: 100%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 .install-download-cta {
   text-align: center;
   margin-top: 40px;
@@ -800,6 +857,10 @@ footer a:hover { text-decoration: underline; }
             &nbsp;&nbsp;style.css<br>
             &nbsp;&nbsp;icon48.png / icon128.png
           </div>
+          <div class="install-tip">
+            <span class="install-tip-icon">&#128161;</span>
+            <span>你不需要修改以上任何檔案內容，確認解壓縮完成後可直接前往 Step 3。</span>
+          </div>
         </div>
       </div>
 
@@ -808,7 +869,11 @@ footer a:hover { text-decoration: underline; }
         <div class="install-step-body">
           <h3>開啟 Chrome 擴充功能頁面</h3>
           <p>在 Chrome 瀏覽器網址列輸入以下網址，進入擴充功能管理頁面：</p>
-          <div class="path-box">chrome://extensions</div>
+          <div class="path-box path-box-row">
+            <span>chrome://extensions</span>
+            <button class="copy-btn" onclick="copyExtUrl(this)" title="複製網址">&#128203; 複製</button>
+            <a class="goto-btn" href="chrome://extensions" title="前往頁面">&#8599; 前往</a>
+          </div>
           <p style="margin-top:10px;">開啟右上角的 <code>開發人員模式</code> (Developer mode) 開關。</p>
         </div>
       </div>
@@ -818,7 +883,8 @@ footer a:hover { text-decoration: underline; }
         <div class="install-step-body">
           <h3>載入擴充功能</h3>
           <p>點擊左上角 <code>載入未封裝項目</code> (Load unpacked) 按鈕，選擇剛才解壓縮的資料夾。</p>
-          <p style="margin-top:6px;">載入成功後，擴充功能列表中會出現「<strong style="color:#60a5fa;">Gmail 一鍵翻譯 — 台灣慣用語中文</strong>」。</p>
+          <img src="step4-load-unpacked.png" alt="Chrome 擴充功能頁面 — 載入未封裝項目" class="install-screenshot">
+          <p style="margin-top:12px;">載入成功後，擴充功能列表中會出現「<strong style="color:#60a5fa;">Gmail 一鍵翻譯 — 台灣慣用語中文</strong>」。</p>
         </div>
       </div>
 
@@ -942,6 +1008,18 @@ function toggleTranslation() {
       btn.innerHTML = '<span>🌐</span> 翻譯成中文';
     }, 800);
   }
+}
+
+// Copy chrome://extensions URL
+function copyExtUrl(btn) {
+  navigator.clipboard.writeText('chrome://extensions').then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = '&#10003; 已複製';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '&#128203; 複製';
+    }, 2000);
+  });
 }
 
 // Smooth reveal on scroll
