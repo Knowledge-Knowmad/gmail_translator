@@ -41,8 +41,15 @@ async function translateText(text) {
 }
 
 async function doTranslate(text) {
-  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q=' + encodeURIComponent(text);
-  const res = await fetch(url);
+  const url = 'https://translate.googleapis.com/translate_a/single';
+  const params = new URLSearchParams({
+    client: 'gtx', sl: 'en', tl: 'zh-TW', dt: 't', q: text
+  });
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
   if (!res.ok) throw new Error('Google Translate HTTP ' + res.status);
   const data = await res.json();
   return data[0].map(c => c[0]).join('');
